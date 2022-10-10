@@ -11,7 +11,7 @@ int main(void)
 	
 	printf("\n       )\\.--.    /`-.   )\\  )\\    )\\.-.  )\\.--.\n      (   ._.' ,' _  \\ (  \\, /  ,'     )(   ._.'\n       `-.`.  (  '-' (  ) \\ (  (  .-, (  `-.`.\n      ,_ (  \\  )   _  )( ( \\ \\  ) '._\\ ),_ (  \\\n     (  '.)  )(  ,' ) \\ `.)/  )(  ,   ((  '.)  )\n   .-./(_)`-.--./    .-,.-.,-..'(/ )\\.' )\\_)\\.---.\n ,'     )) ,-._(     ) ,, ,. (\\  )(  ',/ /(   ,-._(\n(  .-, ( \\ `-._      \\( |(  )/) (  )    (  \\  '-,\n ) '._\\ ) ) ,_(         ) \\   \\  )(  \\(\\ \\  ) ,-`\n(  ,   ( (  \\           \\ (    ) \\ `.) /  )(  ``-.\n )/ ._.'  ).'            )/     )/     '.(  )..-.(\n");
 	sleep(2);
-	printf("\n\nSANDS OF TIME  v0.01\n");
+	printf("\n\nSANDS OF TIME  v0.02\n");
 	sleep(1);
 	printf("A timeless classic by Jeremy Bird\n\n");
 	sleep(2);
@@ -53,18 +53,23 @@ int main(void)
 	
 	system("cls");
 	printf("\nYou will age;\tDays: %i \tHours: %i \tMinutes: %i \tSeconds: %i ",daysgoal,hoursgoal,minsgoal,secsgoal);
-	
-	printf("\n\nAging...\n\n");
+	printf("\n\nAging...\t\t(Press [0 - 9] to manipulate the flow of sand; # [real seconds] per grain of sand.)\n\n");
 	
 	int timepass=0;
+	int timescale=1;
 	
 	while(!(timepass==1))
 	{
+		if(kbhit()){timescale=getch()-48;}
+		if(timescale<0){timescale=1;}
+		if(timescale>9){timescale=1;}
+		
 		if((secs==secsgoal && mins==minsgoal && hours==hoursgoal && days==daysgoal))
 		{timepass=1;}
-	
-		printf("\a\rYou have aged;\tDays: %i \tHours: %i \tMinutes: %i \tSeconds: %i ",days,hours,mins,secs);
-		sleep(1);
+		
+		if(timescale>0){printf("\a");}
+		printf("\rYou have aged;\tDays: %i \tHours: %i \tMinutes: %i \tSeconds: %i \tFlow: %i real second(s) per grain of sand",days,hours,mins,secs,timescale);
+		sleep(timescale);
 		
 		if((secs==59 && mins!=59))
 		{mins=mins+1;secs=0;}
@@ -77,9 +82,12 @@ int main(void)
 	}
 	
 	system("cls");
-	printf("\a\nYou have aged %i days, %i hours, %i minutes and %i seconds sojourning the SANDS OF TIME.");
+	printf("\a\nYou have aged %i days, %i hours, %i minutes and %i seconds sojourning the SANDS OF TIME.\n");
 	sleep(2);
-	printf("\n\nPress any key to quit.");
+	
+	//ENDING
+	
+	printf("\nPress any key to quit.");
 	getch();
 	
 	return 0;
